@@ -143,7 +143,7 @@ function TetrisConsole(width, height) {
 		this.tetris = null;
 		this.tetris = new Tetris({"x":parseInt(this.width/2),"y":0},
 			Math.floor(Math.random()*8), Math.floor(Math.random()*5));
-		return !(this.isRepeat()&&this.isOutOfRange());
+		return !(this.isOutOfRange()||this.isRepeat());
 	}
 	this.dropTetris = function () {
 		this.setTetris(0);

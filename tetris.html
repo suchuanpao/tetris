@@ -25,7 +25,7 @@
  *   Description: ----
  *          Mail: suchuanpao@outlook.com
  *        Create: 2017-05-18 00:00:32
- * Last Modified: 2017-06-05 23:38:14
+ * Last Modified: 2017-06-07 20:04:21
  *  
  ***********************************************************************-->
 
@@ -108,15 +108,17 @@ function TetrisGame(t_id, width, height) {
 		var father = this;
 		return function () {
 			father.tetris_console.dropTetris();
-			window.setTimeout(father.getTimeoutFunc(), father.speed * father.time_span);
 			father.update();
+			if (father.tetris_console.getState() != "DEAD")
+				window.setTimeout(father.getTimeoutFunc(), father.speed * father.time_span);
 		}
 	}
 	this.getKeydownFunc = function () {
 		var father = this;
 		var keys = {"ArrowUp":"UP","ArrowDown":"DOWN","ArrowLeft":"LEFT","ArrowRight":"RIGHT"};
 		return function (event) {
-			father.tetris_console.keydown(keys[event.key]);
+			if (father.tetris_console.getState() != "DEAD")
+				father.tetris_console.keydown(keys[event.key]);
 			father.update();
 		}
 	}
